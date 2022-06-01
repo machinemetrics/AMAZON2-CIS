@@ -78,7 +78,7 @@
       - goss_template
 
 - name: "Pre Audit | Run pre_remediation {{ benchmark }} audit"
-  shell: "{{ audit_conf_dir }}/run_audit.sh -v {{ audit_vars_path }} -o {{ pre_audit_outfile }} -g {{ group_names }}"
+  shell: "{{ audit_conf_dir }}/run_audit.sh -v {{ audit_vars_path }} -o {{ pre_audit_outfile }} -g {{ group_names }} -f {{ audit_format }}"
   changed_when: true
   vars:
       warn: false
@@ -98,7 +98,7 @@
   when:
       - audit_format == "json"
 
-- name: Pre Audit | Capture audit data if documentation format
+- name: Pre Audit | Capture audit data if documentation or RSPECISH format
   block:
       - name: "Pre Audit | capture data {{ pre_audit_outfile }}"
         command: "tail -2 {{ pre_audit_outfile }}"
@@ -109,4 +109,5 @@
         set_fact:
             pre_audit_summary: "{{ pre_audit.stdout_lines }}"
   when:
-      - audit_format == "documentation"
+      - audit_format == "documentation" or
+        audit_format == "rspecish"
