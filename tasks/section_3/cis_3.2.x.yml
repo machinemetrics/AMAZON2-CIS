@@ -10,7 +10,7 @@
             ignoreerrors: true
         notify: sysctl flush ipv4 route table
 
-      - name: "AUTOMATED | 3.2.1 | PATCH | Ensure IP forwarding is disabled | IPv6"
+      - name: "3.2.1 | PATCH | Ensure IP forwarding is disabled | IPv6"
         sysctl:
             name: net.ipv6.conf.all.forwarding
             value: '0'

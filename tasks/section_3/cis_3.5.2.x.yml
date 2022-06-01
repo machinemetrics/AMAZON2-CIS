@@ -259,7 +259,7 @@
 
 - name: "3.5.2.9 | PATCH | Ensure default deny firewall policy"
   block:
-      - name: "AUTOMATED | 3.5.2.9 | AUDIT | Ensure default deny firewall policy | Check for hook input deny policy"
+      - name: "3.5.2.9 | AUDIT | Ensure default deny firewall policy | Check for hook input deny policy"
         shell: nft list table inet "{{ amazon2cis_nft_tables_tableName }}" | grep 'hook input'
         failed_when: false
         changed_when: false
