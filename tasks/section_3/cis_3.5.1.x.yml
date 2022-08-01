@@ -86,7 +86,7 @@
 - name: "3.5.1.6 | AUDIT | Ensure network interfaces are assigned to appropriate zone"
   block:
       - name: "3.5.1.6 | AUDIT | Ensure network interfaces are assigned to appropriate zone | Get list of interfaces and policies"
-        shell: "nmcli -t connection show | awk -F: '{ if($4){print $4} }' | while read INT; do firewall-cmd --get-active-zones | grep -B1 $INT; done"
+        shell: find /sys/class/net/* -maxdepth 1 | awk -F"/" '{print $NF}' | while read -r netint; do [ "$netint" != "lo" ] && firewall-cmd --get-active-zones | grep -B1 $netint; done
         changed_when: false
         failed_when: false
         register: amazon2cis_3_5_1_6_interfacepolicy
