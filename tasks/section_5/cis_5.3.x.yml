@@ -52,7 +52,7 @@
       - name: "5.3.3 | AUDIT | Ensure permissions on SSH public host key files are configured"
         find:
             paths: /etc/ssh
-            patterns: 'ssh_host_*_key'
+            patterns: 'ssh_host_*_key*.pub'
             recurse: true
             file_type: any
         register: amazon2_5_3_3_pub_results
